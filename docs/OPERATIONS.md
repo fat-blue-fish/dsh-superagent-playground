@@ -267,6 +267,8 @@ scripts/dsh-superagent --profile superagent restart
    ```
 3. 恢复 state（数据库只能整体回到旧 schema；不要只替换 `orchestrator.sqlite` 而留下新的 WAL/SHM）：
    ```sh
+   # 先确认 $backup/state-superagent/orchestrator.sqlite 存在且可读；
+   # 不确定备份完整时，先把旧目录改名保留而不是直接删除。
    rm -rf "$state_dir"
    cp -a "$backup/state-superagent" "$state_dir"
    ```
